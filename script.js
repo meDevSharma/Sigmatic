@@ -14,7 +14,11 @@ const elements = {
     galleryPopup: null,
     closePopup: null,
     joinServerBtn: null,
-    countdownElement: null,
+    enterGalleryBtn: null,
+    countdownDisplay: null,
+    initialView: null,
+    countdownView: null,
+    enterGalleryView: null,
     visitorCountElement: null,
     themeToggleBtn: null,
     backToHomeBtn: null,
@@ -47,7 +51,11 @@ function initializeElements() {
     elements.galleryPopup = document.getElementById('gallery-popup');
     elements.closePopup = document.getElementById('close-popup');
     elements.joinServerBtn = document.getElementById('join-server-btn');
-    elements.countdownElement = document.getElementById('countdown-timer');
+    elements.enterGalleryBtn = document.getElementById('enter-gallery-btn');
+    elements.countdownDisplay = document.getElementById('countdown-display');
+    elements.initialView = document.getElementById('initial-view');
+    elements.countdownView = document.getElementById('countdown-view');
+    elements.enterGalleryView = document.getElementById('enter-gallery-view');
     elements.visitorCountElement = document.getElementById('visitor-count');
     elements.typewriterText = document.getElementById('typewriter-text');
     elements.timeDisplay = document.getElementById('current-time-display');
@@ -180,7 +188,11 @@ function initializeEventListeners() {
     
     // Popup controls
     elements.closePopup?.addEventListener('click', hideGalleryPopup);
-    elements.joinServerBtn?.addEventListener('click', openServerInvite);
+    elements.joinServerBtn?.addEventListener('click', function() {
+        startCountdown();
+        openServerInvite();
+    });
+    elements.enterGalleryBtn?.addEventListener('click', grantGalleryAccess);
     
     // Initialize time display
     initializeTimeDisplay();
@@ -315,7 +327,23 @@ function startLogoIntro() {
 // Show gallery popup
 function showGalleryPopup() {
     elements.galleryPopup?.classList.remove('hidden');
-    startCountdown();
+    
+    // Reset popup state - show initial view, hide others
+    if (elements.initialView) {
+        elements.initialView.classList.remove('hidden');
+        elements.initialView.style.opacity = '1';
+    }
+    
+    if (elements.countdownView) {
+        elements.countdownView.classList.add('hidden');
+    }
+    
+    if (elements.enterGalleryView) {
+        elements.enterGalleryView.classList.add('hidden');
+    }
+    
+    // Clear any existing countdown
+    clearInterval(countdownTimer);
     
     // Add ripple effect
     const ripple = elements.accessBtn?.querySelector('.btn-ripple');
@@ -335,44 +363,93 @@ function hideGalleryPopup() {
 
 // Start countdown timer
 function startCountdown() {
-    let timeLeft = 69;
-    elements.countdownElement.textContent = timeLeft;
+    // Hide initial view and show countdown view
+    if (elements.initialView) {
+        elements.initialView.style.opacity = '0';
+        elements.initialView.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+            elements.initialView.classList.add('hidden');
+        }, 300);
+    }
+    
+    setTimeout(() => {
+        if (elements.countdownView) {
+            elements.countdownView.classList.remove('hidden');
+            elements.countdownView.style.opacity = '1';
+            elements.countdownView.style.transform = 'translateY(0)';
+        }
+    }, 300);
+    
+    let timeLeft = 10;
+    if (elements.countdownDisplay) {
+        elements.countdownDisplay.textContent = timeLeft;
+    }
     
     countdownTimer = setInterval(() => {
         timeLeft--;
-        elements.countdownElement.textContent = timeLeft;
+        if (elements.countdownDisplay) {
+            elements.countdownDisplay.textContent = timeLeft;
+        }
         
         // Add pulse animation
-        const circle = elements.countdownElement?.parentElement;
-        if (circle) {
-            circle.style.transform = 'scale(1.1)';
+        const timer = elements.countdownDisplay?.parentElement;
+        if (timer) {
+            timer.style.transform = 'scale(1.1)';
             setTimeout(() => {
-                circle.style.transform = 'scale(1)';
+                timer.style.transform = 'scale(1)';
             }, 100);
         }
         
         if (timeLeft <= 0) {
             clearInterval(countdownTimer);
-            grantGalleryAccess();
+            showEnterGalleryButton();
         }
     }, 1000);
-    
-    // Auto-grant access after 9 seconds for testing
-    setTimeout(() => {
-        if (timeLeft > 0) {
-            clearInterval(countdownTimer);
-            grantGalleryAccess();
-        }
-    }, 9000);
 }
 
-// Grant gallery access
-function grantGalleryAccess() {
-    hideGalleryPopup();
-    showGallery();
+// Show Enter Gallery button after countdown
+function showEnterGalleryButton() {
+    // Hide countdown view and show enter gallery view
+    if (elements.countdownView) {
+        elements.countdownView.style.opacity = '0';
+        elements.countdownView.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+            elements.countdownView.classList.add('hidden');
+        }, 300);
+    }
     
-    // Show success animation
-    showNotification('Gallery access granted! 🎉');
+    // Show Enter Gallery button with smooth transition
+    setTimeout(() => {
+        if (elements.enterGalleryView) {
+            elements.enterGalleryView.classList.remove('hidden');
+            elements.enterGalleryView.style.opacity = '1';
+            elements.enterGalleryView.style.transform = 'translateY(0)';
+        }
+    }, 400);
+}
+
+// Grant gallery access with zoom animation
+function grantGalleryAccess() {
+    const popupContent = document.querySelector('.popup-content');
+    
+    // Add zoom-out animation class
+    if (popupContent) {
+        popupContent.classList.add('zoom-out');
+    }
+    
+    // Hide popup and show gallery after animation
+    setTimeout(() => {
+        hideGalleryPopup();
+        showGallery();
+        
+        // Show success notification
+        showNotification('Gallery access granted! 🎉');
+        
+        // Remove animation class for next time
+        if (popupContent) {
+            popupContent.classList.remove('zoom-out');
+        }
+    }, 300);
 }
 
 // Open server invite

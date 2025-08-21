@@ -1392,25 +1392,32 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2000;
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn 0.4s ease-out;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .popup-content {
     background: var(--glass-bg);
     backdrop-filter: blur(30px);
     border-radius: 25px;
-    padding: 2rem;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: var(--glass-shadow);
-    animation: popupSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 3rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--glass-shadow), 0 0 50px rgba(139, 92, 246, 0.2);
+    animation: popupSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--glass-border);
+    position: relative;
+    transform-origin: center;
+    text-align: center;
 }
 
 @keyframes popupSlideIn {
@@ -1424,62 +1431,141 @@ body {
     }
 }
 
-.popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.popup-header h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
+/* Close Button */
 .close-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--text-secondary);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(220, 38, 38, 0.9);
+    border: 2px solid rgba(220, 38, 38, 1);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
     cursor: pointer;
-    padding: 0.5rem;
     border-radius: 50%;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    z-index: 10;
+}
+
+.close-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
 }
 
 .close-btn:hover {
-    background: var(--bg-secondary);
+    background: rgba(239, 68, 68, 1);
+    border-color: rgba(239, 68, 68, 1);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
+}
+
+.close-btn:hover::before {
+    left: 100%;
+}
+
+.close-btn:active {
+    transform: scale(0.95);
+    transition: all 0.1s ease;
+}
+
+.close-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.close-btn:hover svg {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+}
+
+/* Popup Body */
+.popup-body {
+    padding-top: 1rem;
+}
+
+/* Initial View */
+.initial-view {
+    padding: 2rem 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.instruction-text {
+    font-size: 1.25rem;
+    font-weight: 500;
     color: var(--text-primary);
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
 }
 
-/* Countdown */
-.countdown-container {
-    text-align: center;
-    margin-bottom: 2rem;
+.join-server-btn {
+    background: var(--gradient-primary);
+    border: none;
+    padding: 1.2rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+    min-width: 200px;
+    min-height: 48px;
 }
 
-.countdown-circle {
-    width: 100px;
-    height: 100px;
+.join-server-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(139, 92, 246, 0.6);
+    background: linear-gradient(135deg, #5b52f0 0%, #8b47f5 100%);
+}
+
+.join-server-btn:active {
+    transform: translateY(0);
+}
+
+/* Countdown View */
+.countdown-view {
+    padding: 2rem 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.countdown-timer {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background: var(--gradient-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
+    margin: 0 auto 1.5rem;
     animation: countdownPulse 1s ease-in-out infinite;
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
 }
 
-.countdown-text {
-    font-size: 2rem;
+.countdown-number {
+    font-size: 2.5rem;
     font-weight: 700;
     color: white;
+    font-family: 'JetBrains Mono', monospace;
 }
 
 .countdown-label {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 @keyframes countdownPulse {
@@ -1487,21 +1573,284 @@ body {
     50% { transform: scale(1.05); }
 }
 
-/* Join Button */
-.join-btn {
-    position: relative;
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: white;
-    background: var(--gradient-secondary);
+/* Enter Gallery View */
+.enter-gallery-view {
+    padding: 2rem 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enter-gallery-btn {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
     border: none;
+    padding: 1.2rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
     border-radius: 15px;
     cursor: pointer;
-    margin-bottom: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+    min-width: 200px;
+    min-height: 48px;
+    position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+}
+
+.enter-gallery-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(139, 92, 246, 0.6);
+    background: linear-gradient(135deg, #5b52f0 0%, #8b47f5 50%, #f056a3 100%);
+}
+
+.enter-gallery-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Zoom Animation for Gallery Entry */
+@keyframes zoomInGallery {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+}
+
+.popup-content.zoom-out {
+    animation: zoomInGallery 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Mobile Optimization for Popup */
+@media (max-width: 768px) {
+    .popup-content {
+        padding: 2rem 1.5rem;
+        max-width: 90vw;
+        margin: 0 1rem;
+    }
+    
+    .close-btn {
+        top: 15px;
+        right: 15px;
+        width: 48px;
+        height: 48px;
+    }
+    
+    .instruction-text {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .join-server-btn {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+        min-width: 180px;
+        min-height: 48px;
+    }
+    
+    .countdown-timer {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .countdown-number {
+        font-size: 2rem;
+    }
+    
+    .enter-gallery-btn {
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+        min-width: 180px;
+        min-height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .popup-content {
+        padding: 1.5rem 1rem;
+        max-width: 95vw;
+    }
+    
+    .initial-view,
+    .countdown-view,
+    .enter-gallery-view {
+        padding: 1.5rem 0;
+    }
+    
+    .instruction-text {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .join-server-btn,
+    .enter-gallery-btn {
+        padding: 0.9rem 2rem;
+        font-size: 0.95rem;
+        min-width: 160px;
+    }
+    
+    .countdown-timer {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .countdown-number {
+        font-size: 1.8rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.9rem;
+    }
+}
+
+/* Join Button */
+.join-btn {
+    background: rgba(220, 38, 38, 0.8);
+    border: 2px solid rgba(220, 38, 38, 1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    margin: 0 auto 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.join-btn:hover {
+    background: rgba(239, 68, 68, 0.9);
+    border-color: rgba(239, 68, 68, 1);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
+}
+
+.join-btn:active {
+    transform: scale(0.95);
+}
+
+/* Open Gallery Button */
+.open-gallery-btn {
+    position: relative;
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+    animation: galleryButtonAppear 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    transform: scale(0) translateY(20px);
+    margin-top: 1rem;
+}
+
+.open-gallery-btn:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 12px 35px rgba(139, 92, 246, 0.6);
+    background: linear-gradient(135deg, #5b52f0 0%, #8b47f5 50%, #f056a3 100%);
+}
+
+.open-gallery-btn:active {
+    transform: scale(0.98);
+}
+
+.open-gallery-btn .btn-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Door Animation */
+.door-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.open-gallery-btn:hover .door-animation {
+    opacity: 1;
+}
+
+.door-left,
+.door-right {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.door-left {
+    border-radius: 20px 0 0 20px;
+    transform-origin: left center;
+}
+
+.door-right {
+    border-radius: 0 20px 20px 0;
+    transform-origin: right center;
+}
+
+.open-gallery-btn:hover .door-left {
+    transform: perspective(1000px) rotateY(-45deg);
+}
+
+.open-gallery-btn:hover .door-right {
+    transform: perspective(1000px) rotateY(45deg);
+}
+
+@keyframes galleryButtonAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateY(20px);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1) translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Zoom-in transition effect for gallery access */
+.popup-content.gallery-access {
+    animation: galleryZoomIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes galleryZoomIn {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(20);
+        opacity: 0;
+    }
 }
 
 .join-btn:hover {
@@ -1528,6 +1877,7 @@ body {
     color: var(--text-secondary);
     font-size: 0.9rem;
     line-height: 1.5;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Image Modal */
@@ -1731,8 +2081,30 @@ body {
     }
     
     .popup-content {
-        padding: 1.5rem;
-        margin: 1rem;
+        padding: 2rem;
+        margin: 0.5rem;
+        max-width: 95vw;
+        border-radius: 20px;
+    }
+    
+    .popup-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .close-btn {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .close-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .open-gallery-btn {
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-radius: 15px;
     }
     
     .modal-content {
@@ -1774,5 +2146,16 @@ body {
     
     .countdown-text {
         font-size: 1.5rem;
+    }
+    
+    .join-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 0.8rem;
+    }
+    
+    .placeholder-text {
+        font-size: 1rem;
+        padding: 1.5rem 0;
     }
 }

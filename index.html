@@ -100,28 +100,35 @@
     <!-- Gallery Access Popup -->
     <div id="gallery-popup" class="popup-overlay hidden">
         <div class="popup-content">
-            <div class="popup-header">
-                <h3>Join Server to Access Gallery</h3>
-                <button id="close-popup" class="close-btn">×</button>
-            </div>
+            <!-- Close Button -->
+            <button id="close-popup" class="close-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
             
             <div class="popup-body">
-                <div class="countdown-container">
-                    <div class="countdown-circle">
-                        <span id="countdown-timer" class="countdown-text">69</span>
+                <!-- Initial View -->
+                <div class="initial-view" id="initial-view">
+                    <p class="instruction-text">Join the server to access the gallery</p>
+                    <button id="join-server-btn" class="join-server-btn">
+                        <span>Join Server</span>
+                    </button>
+                </div>
+                
+                <!-- Countdown View -->
+                <div class="countdown-view hidden" id="countdown-view">
+                    <div class="countdown-timer">
+                        <span id="countdown-display" class="countdown-number">10</span>
                     </div>
                     <p class="countdown-label">seconds remaining</p>
                 </div>
                 
-                <div class="popup-actions">
-                    <button id="join-server-btn" class="join-btn">
-                        <span>Join Server</span>
-                        <div class="btn-glow"></div>
+                <!-- Enter Gallery View -->
+                <div class="enter-gallery-view hidden" id="enter-gallery-view">
+                    <button id="enter-gallery-btn" class="enter-gallery-btn">
+                        <span>Enter Gallery</span>
                     </button>
-                    
-                    <p class="popup-instructions">
-                        Watch ads or visit our server while you wait for access
-                    </p>
                 </div>
             </div>
         </div>
