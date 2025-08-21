@@ -1,0 +1,119 @@
+{
+  "siteInfo": {
+    "title": "SIGMATIC's Gallery",
+    "description": "Welcome to my exclusive gallery showcase. Discover a curated collection of premium content in a modern, interactive experience.",
+    "version": "1.0.0",
+    "lastUpdated": "2024-01-20T00:00:00.000Z"
+  },
+  "visitorStats": {
+    "totalVisitors": 0,
+    "uniqueVisitors": 0,
+    "lastVisit": null,
+    "dailyStats": {},
+    "monthlyStats": {}
+  },
+  "galleryImages": [
+    {
+      "id": 1,
+      "filename": "Pic1.jpg",
+      "path": "pics/Pic1.jpg",
+      "alt": "SIGMATIC Gallery Image 1",
+      "title": "Gallery Image 1",
+      "description": "Premium showcase image from SIGMATIC's collection",
+      "uploadDate": "2024-01-20T00:00:00.000Z",
+      "views": 0,
+      "featured": true,
+      "tags": ["showcase", "premium", "gallery"]
+    },
+    {
+      "id": 2,
+      "filename": "Pic2.jpg",
+      "path": "pics/Pic2.jpg",
+      "alt": "SIGMATIC Gallery Image 2",
+      "title": "Gallery Image 2",
+      "description": "Premium showcase image from SIGMATIC's collection",
+      "uploadDate": "2024-01-20T00:00:00.000Z",
+      "views": 0,
+      "featured": true,
+      "tags": ["showcase", "premium", "gallery"]
+    },
+    {
+      "id": 3,
+      "filename": "Pic3.jpg",
+      "path": "pics/Pic3.jpg",
+      "alt": "SIGMATIC Gallery Image 3",
+      "title": "Gallery Image 3",
+      "description": "Premium showcase image from SIGMATIC's collection",
+      "uploadDate": "2024-01-20T00:00:00.000Z",
+      "views": 0,
+      "featured": true,
+      "tags": ["showcase", "premium", "gallery"]
+    },
+    {
+      "id": 4,
+      "filename": "Pic4.jpg",
+      "path": "pics/Pic4.jpg",
+      "alt": "SIGMATIC Gallery Image 4",
+      "title": "Gallery Image 4",
+      "description": "Premium showcase image from SIGMATIC's collection",
+      "uploadDate": "2024-01-20T00:00:00.000Z",
+      "views": 0,
+      "featured": true,
+      "tags": ["showcase", "premium", "gallery"]
+    },
+    {
+      "id": 5,
+      "filename": "Pic5.jpg",
+      "path": "pics/Pic5.jpg",
+      "alt": "SIGMATIC Gallery Image 5",
+      "title": "Gallery Image 5",
+      "description": "Premium showcase image from SIGMATIC's collection",
+      "uploadDate": "2024-01-20T00:00:00.000Z",
+      "views": 0,
+      "featured": true,
+      "tags": ["showcase", "premium", "gallery"]
+    }
+  ],
+  "settings": {
+    "theme": "light",
+    "countdownDuration": 69,
+    "autoAccessDelay": 9,
+    "serverInviteUrl": "https://discord.gg/placeholder",
+    "enableAnimations": true,
+    "enableNotifications": true,
+    "lazyLoadImages": true
+  },
+  "analytics": {
+    "pageViews": {
+      "landing": 0,
+      "gallery": 0
+    },
+    "interactions": {
+      "accessButtonClicks": 0,
+      "themeToggles": 0,
+      "imageViews": 0,
+      "serverInviteClicks": 0
+    },
+    "performance": {
+      "averageLoadTime": 0,
+      "imageLoadErrors": 0
+    }
+  },
+  "metadata": {
+    "createdBy": "SIGMATIC",
+    "createdDate": "2024-01-20T00:00:00.000Z",
+    "technologies": ["HTML5", "CSS3", "JavaScript", "JSON"],
+    "features": [
+      "Responsive Design",
+      "Dark/Light Theme",
+      "Visitor Counter",
+      "Image Gallery",
+      "Modal Viewer",
+      "Countdown Timer",
+      "Smooth Animations",
+      "Touch Support",
+      "Keyboard Navigation",
+      "Lazy Loading"
+    ]
+  }
+}

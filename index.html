@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGMATIC's Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Logo Intro Animation - Clean Design -->
+    <div id="logo-intro" class="logo-intro">
+        <div class="logo-container">
+            <h1 class="animated-logo">
+                <span class="char" data-char="S">S</span>
+                <span class="char" data-char="I">I</span>
+                <span class="char" data-char="G">G</span>
+                <span class="char" data-char="M">M</span>
+                <span class="char" data-char="A">A</span>
+                <span class="char" data-char="T">T</span>
+                <span class="char" data-char="I">I</span>
+                <span class="char" data-char="C">C</span>
+            </h1>
+        </div>
+    </div>
+
+    <!-- Main Website -->
+    <div id="main-site" class="main-site hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-text">
+                        <span class="logo-char" data-char="S">S</span>
+                        <span class="logo-char" data-char="I">I</span>
+                        <span class="logo-char" data-char="G">G</span>
+                        <span class="logo-char" data-char="M">M</span>
+                        <span class="logo-char" data-char="A">A</span>
+                        <span class="logo-char" data-char="T">T</span>
+                        <span class="logo-char" data-char="I">I</span>
+                        <span class="logo-char" data-char="C">C</span>
+                    </span>
+                </div>
+                <div class="current-time">
+                    <div id="current-time-display" class="time-display">
+                        <span class="time-text">00:00</span>
+                        <span class="date-text">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Landing Page -->
+        <main id="landing-page" class="landing-page">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="main-title">SIGMATIC</h1>
+                    <p class="description">
+                        <span class="typewriter-text" id="typewriter-text"></span>
+                    </p>
+                    <button id="access-gallery-btn" class="access-btn">
+                        <span class="btn-text">Access Gallery</span>
+                        <div class="btn-ripple"></div>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+
+
+        <!-- Gallery Section -->
+        <section id="gallery-section" class="gallery-section hidden">
+            <div class="gallery-header">
+                <h2 class="gallery-title">SIGMATIC's Gallery</h2>
+                <button id="back-to-home" class="back-btn">
+                    <span>← Back to Home</span>
+                </button>
+            </div>
+            
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Gallery items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <span class="footer-separator">•</span>
+                    <span class="copyright">© 2024 SIGMATIC</span>
+                    <span class="footer-separator">•</span>
+                    <span class="made-with-love">Made with ❤️</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Gallery Access Popup -->
+    <div id="gallery-popup" class="popup-overlay hidden">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>Join Server to Access Gallery</h3>
+                <button id="close-popup" class="close-btn">×</button>
+            </div>
+            
+            <div class="popup-body">
+                <div class="countdown-container">
+                    <div class="countdown-circle">
+                        <span id="countdown-timer" class="countdown-text">69</span>
+                    </div>
+                    <p class="countdown-label">seconds remaining</p>
+                </div>
+                
+                <div class="popup-actions">
+                    <button id="join-server-btn" class="join-btn">
+                        <span>Join Server</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                    
+                    <p class="popup-instructions">
+                        Watch ads or visit our server while you wait for access
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="image-modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button id="close-modal" class="modal-close">×</button>
+            <img id="modal-image" class="modal-image" src="" alt="">
+            <div class="modal-nav">
+                <button id="prev-image" class="nav-btn prev">‹</button>
+                <button id="next-image" class="nav-btn next">›</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
